@@ -7,8 +7,27 @@ import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import "../../../css/home.css";
 
+import { Dispatch } from "@reduxjs/toolkit";
+import { setPopularDishes } from "./slice";
+import { Product } from "../../../lib/types/product";
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePopularDishes } from "./selector";
+
+
+/** REDUX SLICE & SELECTOR**/
+const actionDispatch = (dispatch: Dispatch) => ({
+    setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
+});
+
+const popularDishesRetriever = createSelector(
+    retrievePopularDishes,
+    (popularDishes) => ({ popularDishes })
+)
+
 export default function HomePage() {
-    // selector
+    const { setPopularDishes } = actionDispatch(useDispatch());
+    const { popularDishes } = useSelector(popularDishesRetriever)
 
     useEffect(() => { }, [])
 
