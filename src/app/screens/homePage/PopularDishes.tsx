@@ -9,14 +9,27 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
-const list = [
-    { productName: "Lavash", imagePath: "/img/lavash.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-];
+import { Product } from "../../../lib/types/product";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePopularDishes } from "./selector";
+import { ProductCollection } from "../../../lib/enums/product.enum";
+import { serverApi } from "../../../lib/config";
+
+
+/** REDUX SLICE & SELECTOR**/
+const popularDishesRetriever = createSelector(
+    retrievePopularDishes,
+    (popularDishes) => ({ popularDishes })
+)
 
 export default function PopularDishes() {
+    const { popularDishes } = useSelector(popularDishesRetriever);
+    console.log("hello: ", popularDishes);
+    console.log(Array.isArray(popularDishes));
+    console.log("popularDishes =", popularDishes);
+    console.log("type =", typeof popularDishes);
+
     return (
         <div className="popular-dishes-frame">
             <Container>
@@ -24,11 +37,12 @@ export default function PopularDishes() {
                     <Box className="category-title">Popular Dishes</Box>
                     <CssVarsProvider>
                         <Stack className="cards-frame">
-                            {list.map((ele, index) => {
+                            {popularDishes.map((product: Product) => {
+                                const imagePath = `${serverApi}/${product.productImages[0]}`
                                 return (
-                                    <Card className={"card"} key={index}>
+                                    <Card className={"card"} key={product._id}>
                                         <CardCover>
-                                            <img src={ele.imagePath} alt="" />
+                                            <img src={imagePath} alt="" />
                                         </CardCover>
                                         <CardCover className={"card-cover"} />
                                         <CardContent sx={{ justifyContent: "flex-end" }}>
@@ -41,7 +55,7 @@ export default function PopularDishes() {
                                                     textColor="#fff"
                                                     sx={{ fontSize: "lg", mb: 1 }}
                                                 >
-                                                    {ele.productName}
+                                                    {product.productName}
                                                 </Typography>
                                                 <Typography
                                                     sx={{
@@ -51,7 +65,7 @@ export default function PopularDishes() {
                                                         display: "flex",
                                                     }}
                                                 >
-                                                    20
+                                                    {product.productViews}
                                                     <VisibilityIcon
                                                         sx={{ fontSize: 25, marginLeft: "5px" }}
                                                     />
@@ -72,7 +86,7 @@ export default function PopularDishes() {
                                                 startDecorator={<DescriptionOutlinedIcon />}
                                                 textColor="neutral.300"
                                             >
-                                                This is delicious meal
+                                                {product.productDecs}
                                             </Typography>
                                         </CardOverflow>
                                     </Card>
