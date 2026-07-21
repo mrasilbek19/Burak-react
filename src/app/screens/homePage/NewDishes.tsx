@@ -7,7 +7,6 @@ import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Divider from "../../components/divider";
-
 import { Product } from "../../../lib/types/product";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
