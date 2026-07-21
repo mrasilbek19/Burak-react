@@ -25,10 +25,6 @@ const popularDishesRetriever = createSelector(
 
 export default function PopularDishes() {
     const { popularDishes } = useSelector(popularDishesRetriever);
-    console.log("hello: ", popularDishes);
-    console.log(Array.isArray(popularDishes));
-    console.log("popularDishes =", popularDishes);
-    console.log("type =", typeof popularDishes);
 
     return (
         <div className="popular-dishes-frame">
