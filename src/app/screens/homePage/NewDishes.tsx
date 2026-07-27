@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Container, Stack } from "@mui/material";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
@@ -13,6 +13,7 @@ import { createSelector } from "reselect";
 import { retrieveNewDishes } from "./selector";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 
 /** REDUX SLICE & SELECTOR**/
@@ -24,6 +25,11 @@ const newDishesRetriever = createSelector(
 export default function NewDishes() {
   const { newDishes } = useSelector(newDishesRetriever)
   console.log("newDishes:", newDishes);
+  const history = useHistory();
+
+  const chooseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  }
 
   return (
     <div className={"new-products-frame"}>
@@ -37,7 +43,7 @@ export default function NewDishes() {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   const sizeVolume = product.productCollection === ProductCollection.DRINK ? product.productVolume + "l" : product.productSize + " size"
                   return (
-                    <Card key={product._id} variant="outlined" className={"card"}>
+                    <Card key={product._id} variant="outlined" className={"card"} onClick={() => chooseDishHandler(product._id)}>
                       <CardOverflow>
                         <div className="product-sale"> {sizeVolume} </div>
                         <AspectRatio ratio="1">

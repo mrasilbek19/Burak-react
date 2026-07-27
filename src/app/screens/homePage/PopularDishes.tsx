@@ -15,6 +15,7 @@ import { createSelector } from "reselect";
 import { retrievePopularDishes } from "./selector";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 
 /** REDUX SLICE & SELECTOR**/
@@ -26,6 +27,11 @@ const popularDishesRetriever = createSelector(
 export default function PopularDishes() {
     const { popularDishes } = useSelector(popularDishesRetriever);
 
+    const history = useHistory();
+
+    const chooseDishHandler = (id: string) => {
+        history.push(`/products/${id}`);
+    }
     return (
         <div className="popular-dishes-frame">
             <Container>
@@ -36,7 +42,7 @@ export default function PopularDishes() {
                             {popularDishes.map((product: Product) => {
                                 const imagePath = `${serverApi}/${product.productImages[0]}`
                                 return (
-                                    <Card className={"card"} key={product._id}>
+                                    <Card className={"card"} key={product._id} onClick={() => chooseDishHandler(product._id)}>
                                         <CardCover>
                                             <img src={imagePath} alt="" />
                                         </CardCover>
