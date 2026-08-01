@@ -33,7 +33,7 @@ export interface Order {
 }
 
 
-export interface orderInquiry {
+export interface OrderInquiry {
     page: number;
     limit: number;
     orderStatus: OrderStatus
