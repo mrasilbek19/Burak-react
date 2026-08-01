@@ -30,7 +30,7 @@ function App() {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   /** HANDLERS **/
 

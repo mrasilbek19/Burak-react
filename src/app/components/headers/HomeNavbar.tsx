@@ -90,7 +90,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                                     ? `${serverApi}/${authMember?.memberImage}`
                                     : "/icons/default-user.svg"
                             }
-                            aria-hospopup={"true"}
+                            aria-haspopup={"true"}
                             onClick={handleLogoutClick}
                         />
                     )}

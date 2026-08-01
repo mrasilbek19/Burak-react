@@ -79,7 +79,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                                     ? `${serverApi}/${authMember?.memberImage}`
                                     : "/icons/default-user.svg"
                             }
-                            aria-hospopup={"true"}
+                            aria-haspopup={"true"}
                             onClick={handleLogoutClick}
                         />
                     )}
