@@ -50,7 +50,7 @@ export default function Basket(props: BasketProps) {
 
       onDeleteAll();
 
-      history.push("/order");
+      history.push("/orders");
 
       //refresh via context
     } catch (err) {
