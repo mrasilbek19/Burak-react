@@ -32,7 +32,6 @@ export default function PausedOrders(props: PausedOrdersProps) {
   const { pausedOrders } = useSelector(pausedOrdersRetriever)
 
   /** HANDLERS **/
-
   const deleteOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
